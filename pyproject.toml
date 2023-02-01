@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "library"
+version = "0.1.0"
+description = ""
+authors = ["Raios Kristi <raioskristi@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.1.4"
+djangorestframework = "^3.14.0"
+django-cors-headers = "^3.13.0"
+pillow = "^9.3.0"
+djangorestframework-jwt = "^1.11.0"
+django-filter = "^22.1"
+psycopg2-binary = "^2.9.5"
+python-telegram-bot = "^20.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
