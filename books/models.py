@@ -76,7 +76,7 @@ class Book(models.Model):
     copy_sign = models.CharField('Авторский знак', max_length=20, null=True, blank=True)
     pages = models.PositiveSmallIntegerField(null=True, blank=True)
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
-    language = models.ForeignKey(Language, help_text='Select a language for this book', on_delete=models.CASCADE)
+    language = models.ManyToManyField(Language, help_text='Select a language for this book')
     readers = models.ManyToManyField(User, through='UserBookRelation')
 
     class Meta:
@@ -96,6 +96,16 @@ class Book(models.Model):
 
     display_genre.short_description = 'Genre'
 
+
+    def display_language(self):
+        """
+        Create a string for the Language. This is required to display language in Admin.
+        """
+        return ', '.join(language.name for language in self.language.all()[:3])
+
+    display_language.short_description = 'Language'
+
+
     def display_author(self):
         """
         Create a string for the Author. This is required to display author in Admin.
@@ -103,6 +113,7 @@ class Book(models.Model):
         return ', '.join(author.__str__() for author in self.authors.all()[:3])
 
     display_author.short_description = 'Author'
+
 
     def __str__(self):
         """
