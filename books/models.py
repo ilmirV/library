@@ -22,6 +22,19 @@ class Genre(models.Model):
         return self.name
 
 
+class Language(models.Model):
+    """
+    Model representing a book language.
+    """
+    name = models.CharField(unique=True, default='Русский', max_length=200, help_text='Enter a book language (e.g. English, Russian)')
+
+    def __str__(self):
+        """
+        String for representing the Model object.
+        """
+        return self.name
+
+
 class Author(models.Model):
     """
     Model representing an author.
@@ -62,6 +75,7 @@ class Book(models.Model):
     copy_sign = models.CharField('Авторский знак', max_length=20, null=True, blank=True)
     pages = models.PositiveSmallIntegerField(null=True, blank=True)
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
+    language = models.ForeignKey(Language, help_text='Select a language for this book', on_delete=models.CASCADE)
     readers = models.ManyToManyField(User, through='UserBookRelation')
 
     class Meta:
