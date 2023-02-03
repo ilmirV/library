@@ -26,7 +26,7 @@ class Language(models.Model):
     """
     Model representing a book language.
     """
-    name = models.CharField(unique=True, default='Русский', max_length=200, help_text='Enter a book language (e.g. English, Russian)')
+    name = models.CharField(unique=True, max_length=200, help_text='Enter a book language (e.g. English, Russian)')
 
     def __str__(self):
         """
