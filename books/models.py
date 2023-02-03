@@ -41,6 +41,7 @@ class Author(models.Model):
     """
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    middle_name = models.CharField(max_length=100, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     date_of_death = models.DateField('Died', null=True, blank=True)
     image = models.ImageField(upload_to='author_images', default='default-author-image.png')
@@ -58,7 +59,7 @@ class Author(models.Model):
         """
         String for representing the Model object.
         """
-        return f'{self.last_name}, {self.first_name}'
+        return f'{self.last_name}, {self.first_name} {self.middle_name}'
 
 
 class Book(models.Model):
