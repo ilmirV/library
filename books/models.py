@@ -13,7 +13,7 @@ class Genre(models.Model):
     """
     Model representing a book genre.
     """
-    name = models.CharField(max_length=200, help_text='Enter a book genre (e.g. Science Fiction)')
+    name = models.CharField(unique=True, max_length=200, help_text='Enter a book genre (e.g. Science Fiction)')
 
     def __str__(self):
         """
@@ -60,7 +60,6 @@ class Book(models.Model):
                             'href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
     bbk = models.CharField('ББК', max_length=50, null=True, blank=True)
     copy_sign = models.CharField('Авторский знак', max_length=20, null=True, blank=True)
-    inventory = models.CharField('Инвентарный номер', max_length=20, null=True, blank=True)
     pages = models.PositiveSmallIntegerField(null=True, blank=True)
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
     readers = models.ManyToManyField(User, through='UserBookRelation')
@@ -103,6 +102,7 @@ class BookInstance(models.Model):
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for '
                           'this particular book across whole library')
+    inventory = models.CharField('Инвентарный номер', unique=True, max_length=20, null=True, blank=True)
     book = models.ForeignKey(Book, on_delete=models.RESTRICT, null=True)
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
