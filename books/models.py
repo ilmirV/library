@@ -70,10 +70,9 @@ class Book(models.Model):
     authors = models.ManyToManyField(Author, help_text='Select the author(s) for this book')
     image = models.ImageField(upload_to='book_covers', default='default-book-cover.png')
     summary = models.TextField(max_length=1500, help_text='Enter a brief description of the book')
+    description = models.TextField(max_length=1500, help_text='Библиографическое описание')
     isbn = models.CharField('ISBN', max_length=13, unique=True, help_text='13 Character <a '
                             'href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
-    bbk = models.CharField('ББК', max_length=50, null=True, blank=True)
-    copy_sign = models.CharField('Авторский знак', max_length=20, null=True, blank=True)
     pages = models.PositiveSmallIntegerField(null=True, blank=True)
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
     language = models.ManyToManyField(Language, help_text='Select a language for this book')
